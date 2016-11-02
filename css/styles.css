@@ -11,3 +11,9 @@ h4 {
   margin-top: 10px;
   margin-bottom: 10px;
 }
+.but{
+  text-align: center;
+}
+#register{
+  display: none;
+}
