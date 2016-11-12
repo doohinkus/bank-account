@@ -37,29 +37,29 @@ $(document).ready(function (){
     var account = new BankAccount(userName, 0);
     bankAccounts.push(account);
 
-    if (userDeposit>=0){
-      bankAccounts[0].deposit(userDeposit);
-    }else {
+
       bankAccounts[0].deposit(userInitialBalance);
-    }
 
 
     $("#openingBalance").hide();
     $("#register").fadeIn();
-
-    // account.withdrawal(parseInt($("#userWithdrawal").val()));
+    $(".but").hide();
+    $(".but2").show();
 
     $("#runningBalanceWell").text(bankAccounts[0].amount);
     $("#userNameHead").text(bankAccounts[0].name);
-// console.log(bankAccounts)
-    //$("#userDeposit").val(0);
-
-
 
 
   });
+  $("#deposit").click(function (event){
+    event.preventDefault();
+    console.log("adsfds")
+    var userDeposit = parseInt($("#userDeposit").val());
+    bankAccounts[0].deposit(userDeposit);
+    $("#runningBalanceWell").text(bankAccounts[0].amount);
+  });
 
-  $("#withdrawalButton").click(function (event){
+  $("#withdrawal").click(function (event){
     var userName = $("#userName").val();
 
     // var account = new BankAccount(userName, 0);
