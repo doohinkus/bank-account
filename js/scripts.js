@@ -33,12 +33,13 @@ $(document).ready(function (){
     var userName = $("#userName").val();
     var userInitialBalance = parseInt($("#userInitialBalance").val());
     var account = new BankAccount(userName, 0);
+  // console.log (userName, " ", userInitialBalance, " ", account)
 
+    // $("#openingBalance").hide();
+    // $("#register").fadeIn();
 
-    $("#openingBalance").hide();
-    $("#register").fadeIn();
-    account.deposit(parseInt($("#userInitialBalance").val()));
-    account.withdrawal(parseInt($("#userWithdrawal").val()));
+    // account.withdrawal(parseInt($("#userWithdrawal").val()));
+    account.deposit(userInitialBalance);
     $("#runningBalanceWell").text(account.amount);
     $("#userNameHead").text(account.name);
 
@@ -49,12 +50,16 @@ $(document).ready(function (){
 
   });
 
-  // $("#withdrawalButton").click(function (event){
-  // event.preventDefault();
+  $("#withdrawalButton").click(function (event){
+    var userName = $("#userName").val();
+    var userInitialBalance = parseInt($("#userInitialBalance").val());
+    var account = new BankAccount(userName, 0);
+  event.preventDefault();
   // console.log(account.withdrawal(parseInt($("#userWithdrawal").val())), "sds");
-  // $("#runningBalanceWell").text(account.amount);
-  // $("#userNameHead").text(account.name);
-  // });
+  account.withdrawal(parseInt($("#userWithdrawal").val()));
+  $("#runningBalanceWell").text(account.amount);
+  $("#userNameHead").text(account.name);
+  });
 
 
 
