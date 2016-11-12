@@ -1,4 +1,4 @@
-
+var bankAccounts = [];
 
 function BankAccount(name, amount) {
   this.name = name;
@@ -6,13 +6,14 @@ function BankAccount(name, amount) {
 
 }
 
-BankAccount.prototype.initialDeposit = function (deposit){
-  return this.amount += deposit;
-  // console.log("function: ", this.amount);
-}
 
 BankAccount.prototype.deposit = function (deposit){
-  return this.amount = deposit + this.amount;
+  if (deposit >=0){
+    return this.amount = deposit + this.amount;
+  }else {
+    return "Please enter a numerical amount"
+  }
+
   // console.log("function: ", this.amount);
 }
 
@@ -32,17 +33,25 @@ $(document).ready(function (){
     event.preventDefault();
     var userName = $("#userName").val();
     var userInitialBalance = parseInt($("#userInitialBalance").val());
+    var userDeposit = parseInt($("#userDeposit").val());
     var account = new BankAccount(userName, 0);
-  // console.log (userName, " ", userInitialBalance, " ", account)
+    bankAccounts.push(account);
 
-    // $("#openingBalance").hide();
-    // $("#register").fadeIn();
+    if (userDeposit>=0){
+      bankAccounts[0].deposit(userDeposit);
+    }else {
+      bankAccounts[0].deposit(userInitialBalance);
+    }
+
+
+    $("#openingBalance").hide();
+    $("#register").fadeIn();
 
     // account.withdrawal(parseInt($("#userWithdrawal").val()));
-    account.deposit(userInitialBalance);
-    $("#runningBalanceWell").text(account.amount);
-    $("#userNameHead").text(account.name);
 
+    $("#runningBalanceWell").text(bankAccounts[0].amount);
+    $("#userNameHead").text(bankAccounts[0].name);
+// console.log(bankAccounts)
     //$("#userDeposit").val(0);
 
 
@@ -52,13 +61,14 @@ $(document).ready(function (){
 
   $("#withdrawalButton").click(function (event){
     var userName = $("#userName").val();
-    var userInitialBalance = parseInt($("#userInitialBalance").val());
-    var account = new BankAccount(userName, 0);
+
+    // var account = new BankAccount(userName, 0);
   event.preventDefault();
   // console.log(account.withdrawal(parseInt($("#userWithdrawal").val())), "sds");
-  account.withdrawal(parseInt($("#userWithdrawal").val()));
-  $("#runningBalanceWell").text(account.amount);
-  $("#userNameHead").text(account.name);
+  bankAccounts[0].withdrawal(parseInt($("#userWithdrawal").val()));
+
+  $("#runningBalanceWell").text(bankAccounts[0].amount);
+  $("#userNameHead").text(bankAccounts[0].name);
   });
 
 
